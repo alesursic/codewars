@@ -24,7 +24,7 @@ import scala.annotation.tailrec
                  | '(' expression ')'
  */
 object AstfDeserialization {
-  def apply(program: String): Function = AstfDeserialization().deserialize(program)
+  def apply(program: String): CFunction = AstfDeserialization().deserialize(program)
 
   case class Acc(exprF: Fix[ExprF], varAcc: List[Char]) {
     def ::(head: Char) = Acc(exprF, head :: varAcc)
@@ -33,13 +33,13 @@ object AstfDeserialization {
 }
 
 case class AstfDeserialization() {
-  def deserialize(program: String): Function = {
+  def deserialize(program: String): CFunction = {
     val parts = program.split("\\[")(1).split("\\]")
 
     val args = parts(0).split(" ").toList.tail
     val expr = evalRunner(null, parts(1).toList.filter(_ != ' '))
 
-    Function2(args, expr)
+    CFunction2(args, expr)
   }
 
   /*

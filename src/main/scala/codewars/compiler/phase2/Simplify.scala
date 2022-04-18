@@ -13,8 +13,8 @@ object Simplify {
       case x => Fix(x) //"identity"
     }
 
-    val g: Fix[ExprF] => Fix[ExprF] = cata(simplifyAlg)
+    val g: Fix[ExprF] => Fix[ExprF] = cata(simplifyAlg) //functor Functor[ExprF] implicitly imported and applied
 
-    g(e)
+    g(e) //uses catamorphism on the expression tree to produce a new simplified expression tree
   }
 }

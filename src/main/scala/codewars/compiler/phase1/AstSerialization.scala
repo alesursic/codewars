@@ -11,8 +11,8 @@ object AstSerialization {
   def dtoToJson(dto: AstDto): String = om.writeValueAsString(dto)
 
   def apply(varToIdx: Map[String, Int]) = AstSerialization(varToIdx)
-  def apply(f: Function): String = f match {
-    case Function1(args, expr) => AstSerialization(args.zipWithIndex.toMap).serialize(expr)
+  def apply(f: CFunction): String = f match {
+    case CFunction1(args, expr) => AstSerialization(args.zipWithIndex.toMap).serialize(expr)
   }
 
   case class AstSerialization(varToIdx: Map[String, Int]) {

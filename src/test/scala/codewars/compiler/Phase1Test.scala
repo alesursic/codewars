@@ -1,7 +1,7 @@
 package codewars.compiler
 
 import codewars.compiler.ASTF.{add, div, in, mul, num, varr}
-import codewars.compiler.phase1.{AstfDeserialization, Function2}
+import codewars.compiler.phase1.{AstfDeserialization, CFunction2}
 import org.scalatest.flatspec.AnyFlatSpec
 
 class Phase1Test extends AnyFlatSpec {
@@ -14,7 +14,7 @@ class Phase1Test extends AnyFlatSpec {
       mul(varr("a"), varr("a")),
       mul(varr("b"), varr("b")),
     )
-    val expectedFunction = Function2(List("a", "b"), expectedAst)
+    val expectedFunction = CFunction2(List("a", "b"), expectedAst)
 
     assert(expectedFunction === function)
   }
@@ -28,7 +28,7 @@ class Phase1Test extends AnyFlatSpec {
       add(varr("a0"), varr("a1")),
       mul(varr("b0"), varr("b1"))
     )
-    val expectedFunction = Function2(List("a0", "a1", "b0", "b1"), expectedAst)
+    val expectedFunction = CFunction2(List("a0", "a1", "b0", "b1"), expectedAst)
 
     assert(expectedFunction === function)
   }
@@ -42,7 +42,7 @@ class Phase1Test extends AnyFlatSpec {
       in(add(varr("first"), varr("second"))),
       num(2)
     )
-    val expectedFunction = Function2(List("first", "second"), expectedAst)
+    val expectedFunction = CFunction2(List("first", "second"), expectedAst)
 
     assert(expectedFunction === function)
   }

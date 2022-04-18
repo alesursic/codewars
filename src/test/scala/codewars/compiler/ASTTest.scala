@@ -2,7 +2,7 @@ package codewars.compiler
 
 import codewars.compiler.AST._
 import codewars.compiler.dto._
-import codewars.compiler.phase1.{AstSerialization, Function1}
+import codewars.compiler.phase1.{AstSerialization, CFunction1}
 import org.scalatest.flatspec.AnyFlatSpec
 
 class ASTTest extends AnyFlatSpec {
@@ -13,7 +13,7 @@ class ASTTest extends AnyFlatSpec {
       Num(2)
     )
 
-    val function  = Function1(List("x", "y"), expr)
+    val function  = CFunction1(List("x", "y"), expr)
 
     //Execute
     val actual = AstSerialization(function)

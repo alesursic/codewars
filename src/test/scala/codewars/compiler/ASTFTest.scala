@@ -2,7 +2,7 @@ package codewars.compiler
 
 import bartosz.falgebras.FAlg.Fix
 import codewars.compiler.ASTF._
-import codewars.compiler.phase1.{AstfSerialization, Function2}
+import codewars.compiler.phase1.{AstfSerialization, CFunction2}
 import org.scalatest.flatspec.AnyFlatSpec
 
 class ASTFTest extends AnyFlatSpec {
@@ -13,7 +13,7 @@ class ASTFTest extends AnyFlatSpec {
       num(2)
     )
 
-    val function = Function2(List("x", "y"), expr)
+    val function = CFunction2(List("x", "y"), expr)
 
     //Execute
     val actual = AstfSerialization(function)

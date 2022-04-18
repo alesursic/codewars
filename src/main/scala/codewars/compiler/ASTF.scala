@@ -5,18 +5,17 @@ import bartosz.falgebras.FAlg.{Fix, Functor}
 object ASTF {
   //Data types:
   trait ExprF[A]
+  case class AddF[A](e: A, t: A) extends ExprF[A]
+  case class SubF[A](e: A, t: A) extends ExprF[A]
+
   trait TermF[A] extends ExprF[A]
-  trait FactorF[A] extends TermF[A]
-
-  case class NumF[A](v: Int) extends FactorF[A]
-  case class VarF[A](v: String) extends FactorF[A]
-  case class InF[A](e: A) extends FactorF[A]
-
   case class MulF[A](t: A, f: A) extends TermF[A]
   case class DivF[A](t: A, f: A) extends TermF[A]
 
-  case class AddF[A](e: A, t: A) extends ExprF[A]
-  case class SubF[A](e: A, t: A) extends ExprF[A]
+  trait FactorF[A] extends TermF[A]
+  case class NumF[A](v: Int) extends FactorF[A]
+  case class VarF[A](v: String) extends FactorF[A]
+  case class InF[A](e: A) extends FactorF[A]
 
   //Helpers:
 
@@ -31,8 +30,10 @@ object ASTF {
 
   implicit val exprfFunctor = new Functor[ExprF] {
     override def fmap[A, B](g: A => B): ExprF[A] => ExprF[B] = {
+      //Base cases:
       case NumF(v) => NumF(v)
       case VarF(v) => VarF(v)
+      //Recursive cases:
       case InF(e) => InF(g(e))
       case DivF(t, f) => DivF(g(t), g(f))
       case MulF(t, f) => MulF(g(t), g(f))

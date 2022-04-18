@@ -9,13 +9,31 @@ C language to Assembly language compiler. Written in April 2021. </br>
 NOTE: Assembly language doesn't run on a real CPU. It only runs on an emulator
 written for the purpose of this project only.
 
-
 <h3>Problem Statement</h3>
 
 Build a compiler that takes a text file in C source code, returns the text 
 file in Assembly language and then feed the result in the Assembly interpreter
 to check if results of the compiled program match the expected ones (assembly
 program takes some expected arguments and returns expected value)
+
+<h3>Language Definition</h3>
+
+    function   ::= '[' arg-list ']' expression
+    
+    arg-list   ::= /* nothing */
+                 | variable arg-list
+
+    expression ::= term
+                 | expression '+' term
+                 | expression '-' term
+
+    term       ::= factor
+                 | term '*' factor
+                 | term '/' factor
+
+    factor     ::= number
+                 | variable
+                 | '(' expression ')'
 
 <h3>How It Works</h3>
 
@@ -41,6 +59,7 @@ https://bartoszmilewski.com/2013/06/10/understanding-f-algebras/
 The implementation of the compiler with Catamorphism is not efficient but it's a very nice way
 to demonstrate how theory can be applied in practise. There are other places where this technique 
 can be applied even for production use cases for instance building DSLs.
+
 
 <h2>Other Projects</h2>
 
