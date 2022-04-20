@@ -3,12 +3,15 @@
 This repository contains several different projects and also 
 solutions to some Codewars exercises.
 
-<h2>C Compiler</h2>
+<h2>C-like Compiler</h2>
 
-C language to Assembly language compiler. Written in April 2021. </br> 
-NOTE: Assembly language doesn't run on a real CPU. It only runs on an emulator
-written for the purpose of this project only.
+C-like language to Assembly language (register-based) compiler.</br> 
 
+NOTE:
+<ul>
+  <li>No static type system</li>
+  <li>Assembly language runs on a simulator</li> 
+</ul>
 <h3>Problem Statement</h3>
 
 Build a compiler that takes a text file in C source code, returns the text 
@@ -16,7 +19,7 @@ file in Assembly language and then feed the result in the Assembly interpreter
 to check if results of the compiled program match the expected ones (assembly
 program takes some expected arguments and returns expected value)
 
-<h3>Language Definition</h3>
+<h3>Source Language Definition (C-like)</h3>
 
     function   ::= '[' arg-list ']' expression
     
@@ -34,6 +37,18 @@ program takes some expected arguments and returns expected value)
     factor     ::= number
                  | variable
                  | '(' expression ')'
+
+<h3>Target Language Definition (Assembly)</h3>
+
+    "IM n"     // load the constant value n into R0
+    "AR n"     // load the n-th input argument into R0
+    "SW"       // swap R0 and R1
+    "PU"       // push R0 onto the stack
+    "PO"       // pop the top value off of the stack into R0
+    "AD"       // add R1 to R0 and put the result in R0
+    "SU"       // subtract R1 from R0 and put the result in R0
+    "MU"       // multiply R0 by R1 and put the result in R0
+    "DI"       // divide R0 by R1 and put the result in R0
 
 <h3>How It Works</h3>
 
